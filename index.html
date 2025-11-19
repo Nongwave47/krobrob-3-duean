@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ครบรอบ 3 เดือนของเรา 💚</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Kanit', sans-serif;
+      background: radial-gradient(circle at top left, #d0f8ce, #b2dfdb, #a5d6a7);
+      color: #2e7d32;
+      text-align: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      padding: 60px 20px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Sacramento', cursive;
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+      color: #1b5e20;
+      text-shadow: 2px 2px 8px rgba(76, 175, 80, 0.3);
+    }
+
+    .header-image {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 25px auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border: 4px solid rgba(255,255,255,0.6);
+    }
+
+    p.description {
+      font-size: 1.25rem;
+      color: #2e7d32;
+      margin-bottom: 40px;
+      line-height: 1.9;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      backdrop-filter: blur(5px);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(90deg, #4caf50, #81c784);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 6px 16px rgba(56, 142, 60, 0.4);
+    }
+
+    footer {
+      margin-top: 70px;
+      font-size: 0.9rem;
+      color: #33691e;
+      padding-bottom: 25px;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* เอฟเฟกต์หัวใจ */
+    #hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      color: #81c784;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 6px rgba(0, 150, 0, 0.2));
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+    }
+
+    .glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent);
+      z-index: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <!-- ✅ เพิ่ม container สำหรับหัวใจ -->
+  <div id="hearts-container"></div>
+
+  <header>
+    <h1>Happy 3 Months 💚</h1>
+    <img src="married.png" alt="รูปของเรา" class="header-image">
+
+    <p class="description">
+      สามเดือนแล้วนะ ที่เราได้เป็นแฟนกันจริง ๆ 💕<br>
+      ขอบคุณที่เข้ามาอยู่ในชีวิตนะ เธอคือคนพิเศษที่ทำให้ทุกวันของฉันมีความหมายมากขึ้น<br>
+      รักเธอเสมอ ไม่ว่าจะผ่านไปกี่เดือนกี่ปี 🌿
+    </p>
+    <a href="memory.html" class="btn">คลิกดูความทรงจำของเรา 🌼</a>
+  </header>
+
+  <footer>
+    © 2025 Our Story 💚 | Created with love by <b>Wave</b>
+  </footer>
+
+  <script>
+    // ฟังก์ชันสร้างหัวใจลอย
+    const colors = ['#81c784', '#a5d6a7', '#66bb6a', '#c8e6c9', '#aed581'];
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '💚';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+      heart.style.fontSize = (18 + Math.random() * 20) + 'px';
+
+      // ✅ แก้ให้เพิ่มหัวใจเข้า container แทน body
+      document.getElementById('hearts-container').appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 350);
+  </script>
+</body>
+</html>
