@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>End 💚</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+    font-family: 'Quicksand', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .end-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 35px;
+    max-width: 550px;
+    width: 100%;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    animation: fadeIn 1s ease;
+    position: relative;
+    z-index: 10;
+  }
+
+  h1 {
+    font-size: 2.6rem;
+    font-weight: 600;
+    color: #2e7d32;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #1b5e20;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-weight: 500;
+  }
+
+  .btn-home {
+    background: #e8f5e9;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: #1b5e20;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .btn-home:hover {
+    background: #81c784;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  /* หัวใจลอยขึ้น */
+  .heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: floatUp 5s linear infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-120vh) translateX(30px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="end-box">
+  <h1>💚 ขอบคุณที่อยู่กับพี่นะ 💚</h1>
+  <p>
+    ขอบคุณที่ตอบคำถามทั้งหมดจนจบ  
+    และขอบคุณที่อยู่ในทุกช่วงเวลาของพี่  
+    ครบ 3 เดือนแล้วนะ…  
+    พี่ดีใจมากที่มีหนูเข้ามาในชีวิต 💕  
+    ต่อจากนี้ พี่อยากมีช่วงเวลาดี ๆ กับหนูไปอีกนานเลย 🌿
+  </p>
+
+  <button class="btn-home" onclick="location.href='index.html'">กลับไปหน้าแรก 💚</button>
+</div>
+
+<script>
+// สร้างหัวใจลอย
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.textContent = "💚";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+  heart.style.fontSize = (18 + Math.random() * 12) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>

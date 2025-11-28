@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline ของเรา 💚</title>
+
+  <!-- ฟอนต์ -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&family=Sacramento&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Kanit', sans-serif;
+      background: radial-gradient(circle at top left, #e8f5e9, #c8e6c9, #a5d6a7);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 2.6rem;
+      color: #2e7d32;
+      font-weight: 500;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px rgba(76,175,80,0.3);
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 0 60px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #66bb6a;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px rgba(102,187,106,0.4);
+    }
+
+    .container {
+      padding: 20px 30px;
+      width: 50%;
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.8s ease;
+    }
+
+    .container.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container.left {
+      left: 0;
+      text-align: right;
+    }
+
+    .container.right {
+      left: 50%;
+      text-align: left;
+    }
+
+    .content {
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(5px);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+      border-left: 5px solid #66bb6a;
+    }
+
+    .container.left .content {
+      border-left: none;
+      border-right: 5px solid #66bb6a;
+    }
+
+    .date {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #388e3c;
+      margin-bottom: 6px;
+    }
+
+    .text {
+      font-size: 1rem;
+      color: #2e7d32;
+    }
+
+    /* nav button */
+    .nav-buttons {
+      width: 90%;
+      max-width: 800px;
+      margin: 30px auto 60px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .nav-btn {
+      background: linear-gradient(90deg, #4caf50, #81c784);
+      color: white;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-family: 'Kanit', sans-serif;
+      box-shadow: 0 4px 12px rgba(56,142,60,0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(56,142,60,0.45);
+    }
+
+    /* HEART floating effect */
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 9999;
+      filter: drop-shadow(0 0 6px rgba(0,150,0,0.2));
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 600px) {
+      .container {
+        width: 90% !important;
+        left: 5% !important;
+        text-align: left !important;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .container.left .content,
+      .container.right .content {
+        border-left: 5px solid #66bb6a;
+        border-right: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 class="title">Timeline ของเรา 💚</h1>
+
+  <div class="timeline">
+
+    <div class="container left">
+      <div class="content">
+        <div class="date">วันแรกที่เริ่มคุยกัน</div>
+        <div class="text">
+          วันที่เราเริ่มคุยกัน… พี่ยังจำความตื่นเต้นและความเขินอายตอนนั้นได้ดี  
+          รู้สึกเหมือนโลกมันหยุดหมุนสักพักเมื่อได้เห็นข้อความหนูครั้งแรก ❤️  
+          พี่รู้สึกว่าหนูเป็นคนพิเศษตั้งแต่เริ่มต้น
+        </div>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <div class="date">วิดีโอคอลทุกวัน</div>
+        <div class="text">
+          แม้ระยะทางจะไกล แต่พี่ดีใจมากที่เราได้เห็นหน้ากันทุกวัน  
+          รู้สึกเหมือนอยู่ใกล้กันตลอดเวลา พูดคุยเรื่องทุกเรื่องตั้งแต่เรื่องเล็ก ๆ  
+          จนถึงเรื่องใหญ่ รู้สึกว่าพี่และหนูเข้าใจกันมากขึ้นทุกวัน 🌿
+        </div>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <div class="date">ขอเป็นแฟน</div>
+        <div class="text">
+          คืนนั้นพี่ใจเต้นแรงมากจริง ๆ… ไม่รู้จะพูดอะไรดี  
+          แต่พี่รู้สึกว่าต้องบอกหนูว่าพี่ชอบหนูมาก  
+          และดีใจที่สุดที่หนูตอบตกลง พี่รู้สึกว่าโลกนี้สดใสขึ้นทันที 💕
+        </div>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <div class="date">เดือนแรก</div>
+        <div class="text">
+          ในเดือนแรกนี้ ทุกวันเต็มไปด้วยรอยยิ้มและความสุข  
+          ถึงแม้เราจะอยู่ไกลกัน แต่พี่รู้สึกว่าใจเราใกล้กันมาก  
+          พี่ตื่นเต้นทุกครั้งที่ได้คุยกับหนู และทุกความทรงจำมันช่างมีค่า 🌙
+        </div>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <div class="date">เดือนที่ 2</div>
+        <div class="text">
+          เดือนที่สอง… พี่เริ่มรู้สึกผูกพันกับหนูมากขึ้นเรื่อย ๆ  
+          รู้สึกเหมือนเราเคยรู้จักกันมานานแล้ว ทั้งความเข้าใจและความใส่ใจ  
+          ทุกเรื่องที่เราพูดกัน ทำให้พี่รักหนูมากขึ้นทุกวัน
+        </div>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <div class="date">เดือนที่ 3</div>
+        <div class="text">
+          วันนี้ครบ 3 เดือนแล้ว… พี่รู้สึกว่าตัวเองโชคดีที่สุดในโลก  
+          ที่ได้เจอหนู รู้สึกเหมือนเราเติบโตไปด้วยกัน ผ่านเรื่องราวต่าง ๆ  
+          และพี่สัญญาว่าจะรักและดูแลหนูให้ดีที่สุดตลอดไป 💚
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-buttons">
+    <a href="letter.html" class="nav-btn">⟵ ย้อนกลับ</a>
+    <a href="countdown.html" class="nav-btn">ต่อไป ⟶</a>
+  </div>
+
+  <!-- script: show timeline when scrolling -->
+  <script>
+    const items = document.querySelectorAll(".container");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, { threshold: 0.2 });
+
+    items.forEach(item => observer.observe(item));
+  </script>
+
+  <!-- script: floating hearts -->
+  <script>
+    const colors = ['#81c784', '#a5d6a7', '#66bb6a', '#c8e6c9', '#aed581'];
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '💚';
+
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.fontSize = (18 + Math.random() * 22) + 'px';
+      heart.style.animation = `floatUp ${4 + Math.random()*3}s linear`;
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 600);
+  </script>
+
+</body>
+</html>

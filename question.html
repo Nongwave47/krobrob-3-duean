@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz ครบรอบ 3 เดือน 💚</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Dancing+Script&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  .quiz-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    padding: 40px 25px;
+    max-width: 500px;
+    width: 100%;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .quiz-container.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    color: #2e7d32;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  }
+
+  .progress {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #1b5e20;
+    font-weight: 600;
+  }
+
+  .question {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1b5e20;
+    margin-bottom: 25px;
+    line-height: 1.4;
+  }
+
+  .options button {
+    background: linear-gradient(90deg, #66bb6a, #81c784);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 25px;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .options button:hover {
+    transform: scale(1.05);
+  }
+
+  .options button.correct {
+    background: #4caf50 !important;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  .options button.wrong {
+    background: #e53935 !important;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  .result {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    font-weight: 600;
+    color: #2e7d32;
+    min-height: 30px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-next {
+    margin-top: 25px;
+    background-color: #c8e6c9;
+    color: #1b5e20;
+    border: none;
+    border-radius: 15px;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: none;
+  }
+
+  .btn-next:hover {
+    background-color: #81c784;
+    color: #fff;
+    transform: scale(1.05);
+  }
+</style>
+</head>
+<body>
+  <div class="quiz-container active" id="quizContainer">
+    <h1>💚 Quiz ครบรอบ 3 เดือน 💚</h1>
+    <div class="progress" id="progress"></div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="result" id="result"></div>
+    <button class="btn-next" id="btnNext" onclick="goToEnd()">ไปหน้า End ⬅</button>
+  </div>
+
+<script>
+const quizContainer = document.getElementById('quizContainer');
+
+const quizData = [
+  { q: "ตอนเราคบกันครบ 3 เดือน เราไปทำอะไรด้วยกัน?", options: ["ทานข้าวด้วยกัน", "ไปเดินเล่น", "วิดีโอคอลคุยยาว ๆ"], answer: "วิดีโอคอลคุยยาว ๆ" },
+  { q: "ของขวัญที่หนูชอบที่สุด 3 เดือนนี้คืออะไร?", options: ["จดหมาย", "รูปคู่", "ข้อความหวาน ๆ"], answer: "ข้อความหวาน ๆ" },
+  { q: "ช่วงเวลาที่ทำให้เราขำกันมากที่สุดคือ?", options: ["เล่นเกมด้วยกัน", "ส่งมีมให้กัน", "คุยเรื่องตลก"], answer: "ส่งมีมให้กัน" },
+  { q: "เวลาที่อยู่ด้วยกัน หนูชอบอะไรที่สุด?", options: ["คุยเรื่องชีวิต", "ฟังเพลงด้วยกัน", "นั่งเงียบ ๆ"], answer: "คุยเรื่องชีวิต" },
+  { q: "หลังจาก 3 เดือน หนูคิดว่าเราน่ารักตรงไหนที่สุด?", options: ["คุยสนุก", "ห่วงใยกัน", "เข้าใจกัน"], answer: "เข้าใจกัน" },
+  { q: "พี่ทำอะไรให้หนูยิ้มบ่อยที่สุด?", options: ["ส่งข้อความหวาน", "ทำตัวตลก", "วิดีโอคอลคุย"], answer: "ส่งข้อความหวาน" },
+  { q: "ช่วง 3 เดือน หนูชอบตอนไหนที่สุด?", options: ["เริ่มคุยกันวันแรก", "วันครบรอบเดือนแรก", "ทุกช่วงที่เราคุยกัน"], answer: "ทุกช่วงที่เราคุยกัน" },
+  { q: "สิ่งที่หนูอยากให้พี่ทำเพิ่ม?", options: ["โทรหาเยอะ ๆ", "ส่งข้อความทุกวัน", "ไปเจอกัน"], answer: "ไปเจอกัน" },
+  { q: "คำพูดหวาน ๆ ที่หนูจำได้มากที่สุด?", options: ["คิดถึงนะ", "พี่รักหนูน๊าาา", "น่ารักจัง"], answer: "พี่รักหนูน๊าาา" },
+  { q: "หลัง 3 เดือน หนูอยากให้ความสัมพันธ์เรายังไงต่อ?", options: ["เหมือนเดิม", "แน่นแฟ้นขึ้น", "ตื่นเต้นต่อไป"], answer: "แน่นแฟ้นขึ้น" },
+  { q: "พี่ทำให้หนูประทับใจเรื่องไหนที่สุด?", options: ["คอยฟังเสมอ", "ส่งข้อความตลอด", "ทำอาหารให้"], answer: "คอยฟังเสมอ" },
+  { q: "ช่วง 3 เดือน เราทะเลาะกันกี่ครั้ง?", options: ["ไม่เคย", "1 ครั้ง", "นับไม่ถ้วน"], answer: "นับไม่ถ้วน" },
+  { q: "พี่ชอบอะไรในตัวหนู?", options: ["ยิ้มง่าย", "ใจดี", "ทั้งสองข้อ"], answer: "ทั้งสองข้อ" },
+  { q: "หนูชอบอะไรในตัวพี่?", options: ["ตลก", "ใจดี", "ทั้งสองข้อ"], answer: "ทั้งสองข้อ" },
+  { q: "ตอนที่เราคุยกันสนุกที่สุดคือเวลาไหน?", options: ["กลางคืน", "ตอนบ่าย", "เช้า ๆ"], answer: "กลางคืน" },
+  { q: "สิ่งที่เราแบ่งปันกันบ่อยที่สุด?", options: ["เพลง", "มีม", "เรื่องส่วนตัว"], answer: "เรื่องส่วนตัว" },
+  { q: "สิ่งที่หนูอยากทำกับพี่ต่อไป?", options: ["การได้อยู่ด้วยกัน", "ทานข้าวด้วยกัน", "วิดีโอคอล"], answer: "การได้อยู่ด้วยกัน" },
+  { q: "ตอน 3 เดือนผ่านไป หนูรู้สึกยังไง?", options: ["มีความสุขมาก", "คิดถึง", "ทุกข้อ"], answer: "ทุกข้อ" },
+  { q: "ถ้าเราห่างกัน หนูทำอะไร?", options: ["คิดถึง", "โทรคุยกัน", "นอน"], answer: "โทรคุยกัน" },
+  { q: "สุดท้าย หนูอยากบอกพี่ว่าอะไร?", options: ["รักมากนะ", "คิดถึง", "ขอบคุณ"], answer: "รักมากนะ" }
+];
+
+let current = 0;
+let score = 0;
+
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const resultEl = document.getElementById('result');
+const progressEl = document.getElementById('progress');
+const btnNext = document.getElementById('btnNext');
+
+function loadQuestion() {
+  progressEl.textContent = `ข้อที่ ${current + 1} / ${quizData.length}`;
+  resultEl.textContent = "";
+  btnNext.style.display = "none";
+
+  if (current >= quizData.length) {
+    questionEl.textContent = "จบแล้ว 💖";
+    optionsEl.innerHTML = "";
+    progressEl.textContent = `แฟนตอบถูกทั้งหมด ${score} / ${quizData.length} ข้อ 🥰`;
+    btnNext.style.display = "inline-block";
+    btnNext.textContent = "ไปหน้า End ⟶";
+    return;
+  }
+
+  const data = quizData[current];
+  questionEl.textContent = data.q;
+  optionsEl.innerHTML = "";
+
+  data.options.forEach(option => {
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    btn.onclick = () => checkAnswer(btn, option);
+    optionsEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(btn, selected) {
+  const correct = quizData[current].answer;
+  const buttons = optionsEl.querySelectorAll('button');
+
+  buttons.forEach(b => {
+    b.disabled = true;
+    if (b.textContent === correct) {
+      b.classList.add('correct');
+    }
+    if (b === btn && selected !== correct) {
+      b.classList.add('wrong');
+    }
+  });
+
+  if (selected === correct) {
+    resultEl.textContent = "ถูกแล้วว 💚🥰";
+    score++;
+  } else {
+    resultEl.textContent = "แง ผิดน้า 😝";
+  }
+
+  current++;
+  setTimeout(loadQuestion, 1200);
+}
+
+function goToEnd() {
+  window.location.href = 'end.html';
+}
+
+loadQuestion();
+</script>
+</body>
+</html>
